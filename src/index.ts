@@ -1,19 +1,21 @@
 import axios from "axios";
 import express from "express";
 import cors from "cors";
-import YTMusic from "ytmusic-api";
 const PORT = 4444;
 const app = express();
 import { spawn } from "child_process";
 import youtubesearchapi from "youtube-search-api";
 
 
-const ytDlpPath =
-  "C:/Users/susha/Desktop/VSCODEFOLDER/testingindexdb/BeatVault/backend/yt-dlp.exe";
+// const ytDlpPath =
+//   "C:/Users/susha/Desktop/VSCODEFOLDER/testingindexdb/BeatVault/backend/yt-dlp.exe";
+
+const ytDlpPath = process.env.YT_DLP_PATH || "/usr/bin/yt-dlp";
+const denoPath = process.env.DENO_PATH || "/usr/bin/deno";
 
 function downloadVideo(url: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    const child = spawn("./yt-dlp.exe", [
+    const child = spawn(ytDlpPath, [
       // ← Relative path works
       url,
       // "--cookies-from-browser",
@@ -56,9 +58,6 @@ function downloadVideo(url: string): Promise<Buffer> {
     });
   });
 }
-
-const ytmusic = new YTMusic();
-await ytmusic.initialize();
 
 app.use(express.urlencoded());
 app.use(express.json());

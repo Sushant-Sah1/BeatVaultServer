@@ -8,12 +8,9 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
-
-    "allowJs": true, // ✅ allow importing .js files
-    "checkJs": false, // ✅ don't type-check JS (avoids TS7016 noise)
-    "noEmit": true
+    "outDir": "./dist", // ✅ Add this
+    "rootDir": "./src", // ✅ Add this
+    "noEmit": false // ✅ Change to false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
